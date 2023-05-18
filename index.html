@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foguis</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(0deg, rgb(164, 252, 255), rgb(1, 1, 71));
+            overflow: hidden;
+        }
+
+        .foguete {
+            position: absolute;
+            top: 600px;
+            left: 800px;
+
+        }
+
+        .lua {
+            position: absolute;
+            top: 550px;
+            left: 500px;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="jquery-3.7.0.min.js"> </script>
+
+    <img id="lua" src="lua.png" width="700px" class="lua">
+    <img id="foguete" src="foguete.gif" width="100px" class="foguete">
+
+    <script>
+
+        //Vamos pegar o tempo inicial:
+
+        data = new Date()
+        tempo_inicial = data.getTime() // tempo em milissegundos
+        tempo_final = data.getTime() // tempo em milissegundos
+
+        if (tempo_final - tempo_inicial > 1000) 
+        {
+            tempo_inicial = tempo_final
+            //coloquem os dois IF aqui dentro
+
+            if (tecla == 37) {
+                x = x - 20
+            }
+            if (tecla == 39) {
+                x = x + 20
+            }
+        }
+        
+
+        document.onkeydown = Pega_Tecla;
+
+        function Pega_Tecla(e) {
+            e = e || window.event;
+
+            tecla = e.keyCode;
+            console.log(tecla); // MOSTRA O CÓDIGO DA TECLA PRESSIONADA
+            if (tecla == 37) {
+                x = x - 20
+            }
+            if (tecla == 39) {
+                x = x + 20
+            }
+        }
+        temporizador = setTimeout(Subir, 1000)
+        x = 600
+        y = 800
+        TOPO = ""
+        ESQUERDA = ""
+
+        function Subir() {
+
+            $("#foguete").animate({ top: TOPO }, 1000)
+            temporizador = null
+            temporizador = setInterval(Descer, 1000)
+
+        }
+
+        function Descer() {
+
+            y = y - 300
+            // LIMITAR para não sair da tela
+            TOPO = y + "px"
+            $("#foguete").animate({ left: ESQUERDA, top: TOPO }, 1000)
+            if (y = 850) {
+                y = 850
+            }
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
